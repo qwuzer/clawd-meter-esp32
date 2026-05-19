@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clawd Meter Control</title>
+<link rel="icon" href="https://claude.ai/favicon.ico">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #000;
+    color: #faf9f5;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 16px;
+    gap: 24px;
+  }
+
+  h1 { font-size: 1.4rem; font-weight: 600; color: #d97757; letter-spacing: 0.04em; }
+
+  #status {
+    font-size: 0.85rem;
+    color: #b0aea5;
+    min-height: 1.2em;
+  }
+  #status.connected { color: #788c5d; }
+  #status.error     { color: #c0392b; }
+
+  .card {
+    background: #1f1f1e;
+    border-radius: 12px;
+    padding: 20px;
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .card h2 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #b0aea5;
+  }
+
+  .btn-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .btn-row-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 8px;
+  }
+  .btn-row-4 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  button {
+    background: #2a2a28;
+    color: #faf9f5;
+    border: 1px solid #3a3a38;
+    border-radius: 8px;
+    padding: 10px 8px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    text-align: center;
+    line-height: 1.3;
+  }
+  button:hover   { background: #3a3a38; border-color: #555; }
+  button.active  { background: #d97757; border-color: #d97757; color: #000; font-weight: 600; }
+  button:disabled { opacity: 0.35; cursor: not-allowed; }
+
+  #connect-btn {
+    width: 100%;
+    max-width: 480px;
+    background: #d97757;
+    color: #000;
+    border: none;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 14px;
+    border-radius: 10px;
+  }
+  #connect-btn:hover    { background: #e08a68; }
+  #connect-btn.connected { background: #788c5d; color: #fff; }
+
+  .auto-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    background: #2a2a28;
+    border: 1px solid #3a3a38;
+    border-radius: 4px;
+    padding: 2px 6px;
+    color: #b0aea5;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .group-label {
+    font-size: 0.65rem;
+    color: #b0aea5;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Clawd Meter</h1>
+<div id="status">Not connected</div>
+
+<button id="connect-btn" disabled>Via daemon</button>
+
+<div class="card" id="anim-card">
+  <h2>Animation <span class="auto-badge" id="auto-badge">AUTO</span></h2>
+
+  <div class="group-label">Idle</div>
+  <div class="btn-row-3">
+    <button class="anim-btn" data-anim="0" onclick="setAnim(0)" disabled>
+      Breathe
+    </button>
+    <button class="anim-btn" data-anim="1" onclick="setAnim(1)" disabled>
+      Blink
+    </button>
+    <button class="anim-btn" data-anim="2" onclick="setAnim(2)" disabled>
+      Look Around
+    </button>
+  </div>
+
+  <div class="group-label">Expression</div>
+  <div class="btn-row-3">
+    <button class="anim-btn" data-anim="3" onclick="setAnim(3)" disabled>
+      Wink
+    </button>
+    <button class="anim-btn" data-anim="4" onclick="setAnim(4)" disabled>
+      Surprise
+    </button>
+    <button class="anim-btn" data-anim="5" onclick="setAnim(5)" disabled>
+      Sleep
+    </button>
+  </div>
+
+  <div class="group-label">Dance</div>
+  <div class="btn-row-4">
+    <button class="anim-btn" data-anim="6" onclick="setAnim(6)" disabled>
+      Bounce
+    </button>
+    <button class="anim-btn" data-anim="7" onclick="setAnim(7)" disabled>
+      Sway
+    </button>
+    <button class="anim-btn" data-anim="10" onclick="setAnim(10)" disabled>
+      Bounce DJ
+    </button>
+    <button class="anim-btn" data-anim="11" onclick="setAnim(11)" disabled>
+      Sway DJ
+    </button>
+  </div>
+  <div class="btn-row">
+    <button class="anim-btn" data-anim="12" onclick="setAnim(12)" disabled style="grid-column:span 2">
+      DJ Mix
+    </button>
+  </div>
+
+  <div class="group-label">Work</div>
+  <div class="btn-row">
+    <button class="anim-btn" data-anim="8" onclick="setAnim(8)" disabled>
+      Coding
+    </button>
+    <button class="anim-btn" data-anim="9" onclick="setAnim(9)" disabled>
+      Think
+    </button>
+  </div>
+
+  <button id="auto-btn" onclick="setAnim(-1)" disabled>
+    ↺ Auto (follow usage rate)
+  </button>
+</div>
+
+<div class="card">
+  <h2>Screen</h2>
+  <div class="btn-row">
+    <button id="mode-sprite" onclick="setMode('sprite')" disabled>Sprite</button>
+    <button id="mode-usage"  onclick="setMode('usage')"  disabled>Usage</button>
+  </div>
+</div>
+
+<script>
+const DAEMON = "http://localhost:8741";
+
+const ANIM_NAMES = [
+  "Idle Breathe", "Idle Blink", "Look Around",
+  "Wink", "Surprise", "Sleep",
+  "Dance Bounce", "Dance Sway",
+  "Work Coding", "Work Think",
+  "Bounce DJ", "Sway DJ", "DJ Mix"
+];
+
+let currentAnim = -1;
+
+function setStatus(msg, cls) {
+  const el = document.getElementById("status");
+  el.textContent = msg;
+  el.className = cls || "";
+}
+
+function setAllDisabled(disabled) {
+  document.querySelectorAll("button:not(#connect-btn)").forEach(b => b.disabled = disabled);
+}
+
+async function send(obj) {
+  try {
+    const r = await fetch(DAEMON + "/command", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(obj),
+    });
+    if (!r.ok) throw new Error("daemon returned " + r.status);
+  } catch (e) {
+    setStatus("Error: " + e.message, "error");
+  }
+}
+
+function highlightAnim(idx) {
+  document.querySelectorAll(".anim-btn").forEach(b => {
+    b.classList.toggle("active", parseInt(b.dataset.anim) === idx);
+  });
+  document.getElementById("auto-badge").style.display = idx === -1 ? "inline-block" : "none";
+}
+
+async function setAnim(idx) {
+  currentAnim = idx;
+  highlightAnim(idx);
+  await send({ anim: idx });
+  if (idx === -1) setStatus("Auto — follows usage rate", "connected");
+  else setStatus("Locked: " + (ANIM_NAMES[idx] || idx), "connected");
+}
+
+async function setMode(mode) {
+  await send({ mode });
+  document.getElementById("mode-sprite").classList.toggle("active", mode === "sprite");
+  document.getElementById("mode-usage").classList.toggle("active",  mode === "usage");
+  setStatus("Screen: " + mode, "connected");
+}
+
+// Poll daemon status and enable/disable controls accordingly.
+async function pollStatus() {
+  try {
+    const r = await fetch(DAEMON + "/status");
+    const s = await r.json();
+    if (s.connected) {
+      setStatus("Connected via daemon", "connected");
+      setAllDisabled(false);
+      highlightAnim(currentAnim);
+    } else {
+      setStatus("Daemon not connected to device", "");
+      setAllDisabled(true);
+    }
+  } catch (_) {
+    setStatus("Daemon not running", "error");
+    setAllDisabled(true);
+  }
+}
+
+setAllDisabled(true);
+pollStatus();
+setInterval(pollStatus, 3000);
+</script>
+</body>
+</html>
