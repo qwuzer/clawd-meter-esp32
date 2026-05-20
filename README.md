@@ -10,6 +10,12 @@ https://github.com/user-attachments/assets/2be2587c-9d44-4812-93e1-674da441828f
 
 <img src="assets/screenshot.jpg" width="360" alt="Word screen showing 'claude is Concocting...'">
 
+<br>
+
+| | | |
+|:---:|:---:|:---:|
+| <img src="assets/IMG_7396.JPG" width="250"> | <img src="assets/IMG_7397.JPG" width="250"> | <img src="assets/IMG_7398.JPG" width="250"> |
+
 Animations auto-select based on usage rate and time of day. No API calls midnight–7 am (UTC+8).
 
 ---
