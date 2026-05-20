@@ -2,18 +2,21 @@
 
 A physical Claude usage monitor built on ESP32-C3 Super Mini. Displays your Claude rate-limit stats and an animated pixel-art mascot on a 1.54" TFT screen, connected to a Mac daemon over BLE. Inspired by [Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter) & [clawd-mochi](https://github.com/yousifamanuel/clawd-mochi). Get the [3D case file here](https://makerworld.com/en/models/2559505-clawd-mochi-physical-claude-code-mascot#profileId-2820000).
 
-```
-sprite animation (30s) → "claude is Cogitating..." (5s) → usage % + bars (5s) → repeat
-```
-
 <div align="center">
   <video src="https://github.com/user-attachments/assets/2be2587c-9d44-4812-93e1-674da441828f" controls width="360"></video>
 </div>
 
+<div align="center">
 
-| | | |
+| Sprite (30s) | Word (5s) | Usage (5s) |
 |:---:|:---:|:---:|
-| <img src="assets/IMG_7396.JPG" width="250"> | <img src="assets/IMG_7397.JPG" width="250"> | <img src="assets/IMG_7398.JPG" width="250"> |
+| <img src="assets/sprite.JPG" width="250"> | <img src="assets/comment.JPG" width="250"> | <img src="assets/usage.JPG" width="250"> |
+
+</div>
+
+```
+sprite animation (30s) → "claude is Cogitating..." (5s) → usage % + bars (5s) → repeat
+```
 
 Animations auto-select based on usage rate and time of day. No API calls midnight–7 am (UTC+8).
 
