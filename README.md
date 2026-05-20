@@ -6,6 +6,8 @@ A physical Claude usage monitor built on ESP32-C3 Super Mini. Displays your Clau
 sprite animation (30s) → "claude is Cogitating..." (5s) → usage % + bars (5s) → repeat
 ```
 
+<video src="display.mp4" controls width="360"></video>
+
 Animations auto-select based on usage rate and time of day. No API calls midnight–7 am (UTC+8).
 
 ---
