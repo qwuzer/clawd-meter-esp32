@@ -57,7 +57,7 @@ cd tools
 python3 gen_sprites.py --inject
 ```
 
-This re-injects the sprite arrays directly into `clawd_meter.ino`. The JSON source files live in `tools/claudepix_data/` and were originally sourced from [claudepix.vercel.app](https://claudepix.vercel.app) by [@amaanbuilds](https://github.com/amaanbuilds).
+This re-injects the sprite arrays directly into `clawd_meter.ino`. The JSON source files live in `tools/claudepix_data/` and were originally sourced from [claudepix.vercel.app](https://claudepix.vercel.app) by [@amaanbuilds](https://x.com/amaanbuilds).
 
 ### 2. Flash firmware
 
@@ -186,7 +186,7 @@ The daemon never stores your Claude credentials — it reads them live from your
 
 ## Credits
 
-- **Pixel-art Clawd animation** by [@amaanbuilds](https://github.com/amaanbuilds), sourced from [claudepix.vercel.app](https://claudepix.vercel.app). Frame data and palettes converted by `tools/gen_sprites.py`.
+- **Pixel-art Clawd animation** by [@amaanbuilds](https://x.com/amaanbuilds), sourced from [claudepix.vercel.app](https://claudepix.vercel.app). Frame data and palettes converted by `tools/gen_sprites.py`.
 - **Clawdmeter** by [HermannBjorgvin](https://github.com/HermannBjorgvin/Clawdmeter) — original BLE architecture, sprite system, daemon structure, and tooling that this project builds on.
 - **clawd-mochi** by [yousifamanuel](https://github.com/yousifamanuel/clawd-mochi) — additional reference implementation.
 
@@ -207,7 +207,7 @@ The daemon never stores your Claude credentials — it reads them live from your
 
 **The software code** (daemon, firmware logic, Scriptable widget) is shared for personal and educational use.
 
-This project uses the **Clawd mascot**, which is Anthropic's copyrighted character. Pixel-art frames were created by [@amaanbuilds](https://github.com/amaanbuilds) and are included here solely for local use — they were originally sourced from [claudepix.vercel.app](https://claudepix.vercel.app).
+This project uses the **Clawd mascot**, which is Anthropic's copyrighted character. Pixel-art frames were created by [@amaanbuilds](https://x.com/amaanbuilds) and are included here solely for local use — they were originally sourced from [claudepix.vercel.app](https://claudepix.vercel.app).
 
 The upstream project [Clawdmeter](https://github.com/HermannBjorgvin/Clawdmeter) carries this explicit warning:
 
